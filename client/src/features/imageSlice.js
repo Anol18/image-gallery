@@ -6,6 +6,9 @@ export const imageData = createSlice({
     images: data,
   },
   reducers: {
+    newStateOfImages: (state, action) => {
+      state.images = action.payload;
+    },
     deleteImage: (state, action) => {
       //   console.log(data);
       const itemsToDelete = Object.keys(action.payload).filter(
@@ -18,5 +21,5 @@ export const imageData = createSlice({
   },
 });
 
-export const { deleteImage } = imageData.actions;
+export const { deleteImage, newStateOfImages } = imageData.actions;
 export default imageData.reducer;

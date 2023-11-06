@@ -2,6 +2,7 @@ import { Col, Row } from "antd";
 import { CheckSquareFilled } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteImage } from "../features/imageSlice";
+import { selectedItem } from "../features/headerSlice";
 
 const Header = () => {
   const item = useSelector((state) => state.headerData.item);
@@ -18,6 +19,7 @@ const Header = () => {
   const handleDelete = () => {
     // console.log(item);
     dispatch(deleteImage(item));
+    dispatch(selectedItem(0));
   };
   return (
     <>
@@ -29,7 +31,7 @@ const Header = () => {
         <Col
           className="bg-white  rounded-t-md"
           lg={{ span: 15 }}
-          xs={{ span: 20 }}
+          xs={{ span: 24 }}
         >
           <Row className="flex justify-between items-center h-20 px-10">
             <Col>
