@@ -107,7 +107,7 @@ const Gallery = () => {
                             )}
                             {/* image tab to visible images */}
                             <img
-                              className={`rounded-md border-2  bg-white cursor-pointer ${
+                              className={`rounded-md border-2 bg-white cursor-pointer ${
                                 selected[item.id] === true
                                   ? "opacity-50"
                                   : "hover:brightness-75 transition-all duration-300"

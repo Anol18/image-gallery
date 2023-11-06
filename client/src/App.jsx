@@ -1,7 +1,8 @@
-import { Suspense, lazy, useState } from "react";
-import "./App.css";
-const Layout = lazy(() => import("./pages/layout/Layout")); //dynamically importing Layout
+import { Suspense, lazy } from "react";
 import Spinner from "./components/Spinner";
+
+const Layout = lazy(() => import("./pages/layout/Layout")); //dynamically importing Layout
+
 function App() {
   return (
     <>

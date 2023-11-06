@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import headerData from "../features/headerSlice";
 import imageData from "../features/imageSlice";
+// Redux store
 const store = configureStore({
   reducer: {
     headerData: headerData, //header slice

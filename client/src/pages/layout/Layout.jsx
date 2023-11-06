@@ -3,7 +3,9 @@ import Gallery from "../gallery/Gallery";
 const Layout = () => {
   return (
     <>
+      {/* Header */}
       <Header />
+      {/* Images gallery */}
       <Gallery />
     </>
   );
