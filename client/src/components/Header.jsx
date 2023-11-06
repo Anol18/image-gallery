@@ -1,12 +1,14 @@
 import { Col, Row } from "antd";
-import { CheckSquareFilled } from "@ant-design/icons";
+import { CheckSquareFilled } from "@ant-design/icons"; //selected icon
 import { useDispatch, useSelector } from "react-redux";
-import { deleteImage } from "../features/imageSlice";
-import { selectedItem } from "../features/headerSlice";
+import { deleteImage } from "../features/imageSlice"; //import reduces from redux slice
+import { selectedItem } from "../features/headerSlice"; //import reduces from redux slice
 
 const Header = () => {
-  const item = useSelector((state) => state.headerData.item);
-  const dispatch = useDispatch();
+  const item = useSelector((state) => state.headerData.item); //image items data from redux store
+  const dispatch = useDispatch(); //dispatch function from react-redux
+
+  // count function of selected items
   const countSelectedItems = () => {
     let count = 0;
     Object.values(item).map((i) => {
@@ -16,23 +18,26 @@ const Header = () => {
     });
     return count;
   };
+
+  // delete function, send data to redux store
   const handleDelete = () => {
-    // console.log(item);
-    dispatch(deleteImage(item));
-    dispatch(selectedItem(0));
+    dispatch(deleteImage(item)); //send selected data's info
+    dispatch(selectedItem(0)); //reset selected state after deletion
   };
   return (
     <>
+      {/* header row */}
       <Row
         justify="center"
         style={{ backgroundColor: "aliceblue" }}
         className="mt-10"
       >
         <Col
-          className="bg-white  rounded-t-md"
+          className="bg-white rounded-t-md"
           lg={{ span: 15 }}
           xs={{ span: 24 }}
         >
+          {/* inner row */}
           <Row className="flex justify-between items-center h-20 px-10">
             <Col>
               <span className="text-xl font-bold text-gray-800">
@@ -47,6 +52,7 @@ const Header = () => {
               </span>
             </Col>
             <Col>
+              {/* delete button */}
               <button
                 className="hover:underline  font-bold text-red-700"
                 onClick={handleDelete}

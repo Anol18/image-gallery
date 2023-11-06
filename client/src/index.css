@@ -10,3 +10,10 @@
 body {
   background-color: aliceblue;
 }
+.react-beautiful-dnd-draggable {
+  transition: transform 0.2s;
+}
+.content {
+  padding: 50px;
+  border-radius: 4px;
+}

@@ -16,6 +16,7 @@ const Gallery = () => {
   const handleMouseEnter = (id) => {
     setHoveredImageId(id);
   };
+
   // mouse leave to checkbox hide function
   const handleMouseLeave = () => {
     setHoveredImageId(null);
@@ -30,7 +31,9 @@ const Gallery = () => {
     setSelected(newItemSelected);
     dispatch(selectedItem(newItemSelected)); //dispatch delected is information to store data in redux to show the slected infor to header
   };
-  function onDragEnd(result) {
+
+  // drag function to get track of changes images positions
+  const onDragEnd = (result) => {
     if (!result.destination) {
       return; // No valid destination, do nothing
     }
@@ -43,29 +46,36 @@ const Gallery = () => {
       const updatedImages = [...images];
       const [movedImage] = updatedImages.splice(startIndex, 1);
       updatedImages.splice(endIndex, 0, movedImage);
+      console.log(updatedImages);
       dispatch(newStateOfImages(updatedImages));
     }
-  }
+  };
 
   return (
     <>
+      {/* antd Row */}
       <Row
         justify="center"
         style={{ backgroundColor: "aliceblue", height: "100vh" }}
       >
+        {/* antd column to make a container */}
         <Col lg={{ span: 15 }}>
           <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="image-gallery" direction="horizontal">
+            <Droppable
+              droppableId="image-gallery"
+              direction="horizontal"
+              type="list"
+            >
               {(provided) => (
                 <div
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 container bg-white p-10 rounded-b-md"
                 >
-                  {/* <Draggable key={item.id} draggableId={item.id} index={index}> */}
-
-                  {images.map((item, index) => {
+                  {/* mapping images */}
+                  {images?.map((item, index) => {
                     return (
+                      // dragable area init
                       <Draggable
                         key={item.id}
                         draggableId={item.id}
@@ -85,12 +95,6 @@ const Gallery = () => {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                           >
-                            {/* <input
-                    type="checkbox"
-                    className="absolute h-5 w-5 cursor-pointer top-4 left-4 z-10 "
-                    key={item.id + "key"}
-                    onChange={(e) => handleSelect(item.id, e)}
-                  /> */}
                             {(hoveredImageId === item.id ||
                               selected[item.id]) === true && (
                               <input
@@ -101,7 +105,7 @@ const Gallery = () => {
                                 onChange={(e) => handleSelect(item.id, e)}
                               />
                             )}
-
+                            {/* image tab to visible images */}
                             <img
                               className={`rounded-md border-2  bg-white cursor-pointer ${
                                 selected[item.id] === true
@@ -112,13 +116,14 @@ const Gallery = () => {
                               alt={item.alt}
                               key={item.id}
                             />
+
                             {provided.placeholder}
                           </div>
                         )}
                       </Draggable>
                     );
                   })}
-
+                  {/* Upload button */}
                   <div className="flex items-center justify-center w-[300px] ml-5 lg:w-dull md:w-full md:ml-0">
                     <label
                       htmlFor="dropzone-file"
